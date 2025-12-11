@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fillipo - Panel de Administración</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- ==================== LOGIN PAGE ==================== -->
+  <div id="loginPage" class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">🍦</div>
+        <h1 class="login-title">Fillipo Heladería</h1>
+        <p class="login-subtitle">Panel de Administración</p>
+      </div>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            class="form-input" 
+            placeholder="admin@fillipo.com"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="form-input" 
+            placeholder="••••••••"
+            required
+          >
+        </div>
+        
+        <button type="submit" class="btn btn-primary" id="loginBtn">
+          Iniciar Sesión
+        </button>
+        
+        <div id="loginError" class="error-message hidden"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD =================== -->
+  <div id="dashboardPage" class="dashboard hidden">
+    <header class="dashboard-header">
+      <div class="dashboard-title">
+        <span>☕</span>
+        <span>Fillipo</span>
+      </div>
+      <div class="dashboard-actions">
+        <span class="user-info" id="userEmail"></span>
+        <button class="btn btn-secondary" id="logoutBtn">Cerrar Sesión</button>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <div class="section-header">
+        <h2 class="section-title">Gestión de Menú</h2>
+      </div>
+
+      <div id="loadingState" class="loading">
+        <div class="spinner"></div>
+      </div>
+
+      <div id="categoriesContainer" class="categories-grid hidden"></div>
+    </main>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  
+  <!-- Configuración y Scripts -->
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

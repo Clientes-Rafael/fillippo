@@ -1,0 +1,11 @@
+{
+  "name": "fillipo-firebase",
+  "version": "1.0.0",
+  "description": "Firebase backend para Fillipo",
+  "scripts": {
+    "init-data": "node firestore-init-data-fillipo.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

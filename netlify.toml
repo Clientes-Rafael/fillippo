@@ -1,0 +1,26 @@
+[build]
+  base = "code"
+  command = "npm ci --legacy-peer-deps && npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20.11.0"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Permitir acceso al panel de administración
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
+# Catch-all para Next.js SPA (no forzar si el archivo existe)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false

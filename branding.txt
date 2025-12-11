@@ -1,0 +1,39 @@
+Colors
+Brand Color
+Black
+HEX: #000000
+HSL: 0, 0%, 0%
+RGB: 0, 0, 0
+CMKY: 0, 100, 0, 0
+#74b354
+#ffffff
+
+Fonts
+Poiret One
+Space_Mono
+
+
+
+
+About Us
+Fillippo Heladería, ubicada en Ramos Mejía, es el destino ideal para los amantes del helado. Reconocida por su amplia variedad de sabores tanto tradicionales como creativos, nuestra heladería se destaca por la calidad de sus ingredientes y la esmerada presentación de sus postres. Ofrecemos un ambiente acogedor con un servicio atento, que nuestros clientes valoran en cada visita. Con horarios extendidos los fines de semana, es el lugar perfecto para disfrutar de un delicioso postre en buena compañía. Descubre por qué somos una referencia local en calidad y satisfacción.
+
+
+Mission/Vision
+Mission
+Ofrecer helados de alta calidad y una experiencia memorable a nuestros clientes a través de sabores innovadores y un servicio excepcional.
+Vision
+Convertirnos en la heladería preferida de la comunidad, reconocida por nuestra pasión en crear momentos dulces y especiales para todos.
+
+CalidadCalidad
+CreatividadCreatividad
+Servicio al clienteServicio al cliente
+
+Slogan/Voice
+Slogan
+Dulzura que inspira sonrisas
+
+Tone
+Acogedor
+Entusiasta
+Creativo
