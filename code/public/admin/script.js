@@ -180,16 +180,26 @@ function createCategoryCard(category, items) {
 }
 
 function createItemsTable(categoryId, items) {
-  const itemsHtml = items.map(item => `
+  const itemsHtml = items.map(item => {
+    const description = escapeHtml(item.descripcion || '');
+    const isMobile = window.innerWidth <= 768;
+    const needsTruncate = description.length > 50 && isMobile;
+    
+    return `
     <tr data-item-id="${item.id}">
       <td class="item-name-cell">${escapeHtml(item.nombre)}</td>
       <td class="item-description-cell">
         <span 
           class="editable-description" 
           onclick="editDescription('${categoryId}', '${item.id}')"
-          data-description="${escapeHtml(item.descripcion || '')}"
+          data-description="${description}"
           title="Clic para editar descripción"
-        >${escapeHtml(item.descripcion || '')}</span>
+        >
+          <span class="item-description-text ${needsTruncate ? 'truncated' : ''}" data-full-text="${description}">
+            ${description}
+          </span>
+          ${needsTruncate ? `<span class="description-toggle" onclick="event.stopPropagation(); toggleDescription(this)">ver más</span>` : ''}
+        </span>
       </td>
       <td>
         <span 
@@ -469,6 +479,22 @@ function escapeHtml(text) {
   };
   return String(text).replace(/[&<>"']/g, m => map[m]);
 }
+
+// Toggle description expansion (mobile)
+window.toggleDescription = function(toggleElement) {
+  const descriptionText = toggleElement.previousElementSibling;
+  const isExpanded = descriptionText.classList.contains('expanded');
+  
+  if (isExpanded) {
+    descriptionText.classList.remove('expanded');
+    descriptionText.classList.add('truncated');
+    toggleElement.textContent = 'ver más';
+  } else {
+    descriptionText.classList.remove('truncated');
+    descriptionText.classList.add('expanded');
+    toggleElement.textContent = 'ver menos';
+  }
+};
 
 function getErrorMessage(errorCode) {
   const messages = {
