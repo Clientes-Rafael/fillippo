@@ -181,13 +181,14 @@ function createCategoryCard(category, items) {
 
 function createItemsTable(categoryId, items) {
   const itemsHtml = items.map(item => {
+    const nombre = escapeHtml(item.nombre || '');
     const description = escapeHtml(item.descripcion || '');
     const isMobile = window.innerWidth <= 768;
     const needsTruncate = description.length > 50 && isMobile;
     
     return `
     <tr data-item-id="${item.id}">
-      <td class="item-name-cell">${escapeHtml(item.nombre)}</td>
+      <td class="item-name-cell">${nombre}</td>
       <td class="item-description-cell">
         <span 
           class="editable-description" 
@@ -213,14 +214,15 @@ function createItemsTable(categoryId, items) {
       <td class="actions-cell">
         <button 
           class="btn-icon btn-danger" 
-          onclick="deleteItem('${categoryId}', '${item.id}', '${escapeHtml(item.nombre)}')"
+          onclick="deleteItem('${categoryId}', '${item.id}', '${nombre}')"
           title="Eliminar"
         >
           🗑️
         </button>
       </td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
   
   return `
     <table class="items-table">
