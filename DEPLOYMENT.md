@@ -266,7 +266,7 @@ npm run init-data
 
 ### Colores:
 - Editar `fillipo/code/app/globals.css`
-- Color principal: Verde Fillipo `#74b354`
+- Color principal: Verde Fillipo `#73B550`
 - Sistema de colores: OKLCH
 
 ### Imágenes:

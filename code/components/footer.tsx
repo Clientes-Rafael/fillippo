@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPin, Phone, Clock, Mail } from "lucide-react"
+import { MapPin, Phone, Clock, Mail, MessageCircle } from "lucide-react"
 import Image from "next/image"
 
 export default function Footer() {
@@ -20,9 +20,7 @@ export default function Footer() {
               />
               <span className="font-serif text-lg font-bold">Fillippo</span>
             </div>
-            <p className="text-primary-foreground/80 leading-relaxed">
-              Dulzura que inspira sonrisas. Tu heladería de confianza en Ramos Mejía con la mejor calidad y sabor.
-            </p>
+            
           </div>
 
           {/* Hours */}
@@ -32,15 +30,15 @@ export default function Footer() {
               <div className="flex items-start gap-2">
                 <Clock size={18} className="mt-1 flex-shrink-0" />
                 <div>
-                  <p className="font-medium">Lunes - Jueves</p>
-                  <p>14:00 - 23:00</p>
+                  <p className="font-medium">De martes a Domingos</p>
+                  <p>10:00 - 00:00 hs</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <Clock size={18} className="mt-1 flex-shrink-0" />
                 <div>
-                  <p className="font-medium">Viernes - Domingo</p>
-                  <p>12:00 - 00:00</p>
+                  <p className="font-medium">Viernes y Sábados</p>
+                  <p>Hasta 1am</p>
                 </div>
               </div>
             </div>
@@ -53,18 +51,18 @@ export default function Footer() {
               <div className="flex items-start gap-2">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
                 <p>
-                  Ramos Mejía
+                  Matienzo 2210 esq Wernicke
                   <br />
-                  Buenos Aires, Argentina
+                  Ciudad Jardín, Buenos Aires
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} />
-                <p>Consultá disponibilidad</p>
+                <p>48439521</p>
               </div>
               <div className="flex items-center gap-2">
-                <Mail size={18} />
-                <p>info@fillippo.com.ar</p>
+                <MessageCircle size={18} />
+                <p>1123907229</p>
               </div>
             </div>
           </div>
@@ -83,8 +81,8 @@ export default function Footer() {
         {/* Google Maps */}
         <div className="mb-12 w-full">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13138.089447894165!2d-58.57!3d-34.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7f1f5c5c5c5%3A0x5c5c5c5c5c5c5c5!2sRamos%20Mej%C3%ADa%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1234567890123!5m2!1ses!2sar"
-            className="w-full h-64 md:h-80 rounded-sm border border-primary-foreground/20"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d821.1257902285533!2d-58.5917193!3d-34.5914361!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb9ae67608b87%3A0x59e30aca61c1d3f1!2sFillippo%20Helados%20%2B%20Cafe!5e0!3m2!1sen!2sar!4v1765825744899!5m2!1sen!2sar"
+            className="w-full h-64 md:h-80 rounded-lg border border-primary-foreground/20"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"

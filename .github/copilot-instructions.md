@@ -199,7 +199,7 @@ async function getMenuData() {
 
 ### Fillippo Heladería Branding (Template Example)
 This template was customized for an ice cream shop in Ramos Mejía, Argentina:
-- **Colors:** Black `#000000`, primary green `#74b354` → converted to OKLCH
+- **Colors:** Black `#000000`, primary green `#73B550` → converted to OKLCH
 - **Fonts:** Poiret One (headings), Space Mono (body)
 - **Tone:** Welcoming, creative, enthusiastic
 - **Language:** Spanish with Argentine voseo ("Disfrutá", "Visitanos")
@@ -207,7 +207,7 @@ This template was customized for an ice cream shop in Ramos Mejía, Argentina:
 
 ### Fillipo with Firebase Integration
 Current implementation with dynamic menu:
-- **Colors:** Black `#000000`, primary green `#74b354` (converted to OKLCH in CSS)
+- **Colors:** Black `#000000`, primary green `#73B550` (converted to OKLCH in CSS)
 - **Products:** 71 items across 12 categories (Café Caliente, Especiales, Frappes, Smoothies, etc.)
 - **Admin:** Use Firebase Authentication (create user via Firebase Console)
 - **Data structure:** Each category = separate Firestore collection (PascalCase names)

@@ -29,7 +29,7 @@ function formatPrice(price: number): string {
 
 export default function Menu({ categories }: MenuProps) {
   return (
-    <section id="menu" className="py-20 md:py-32 bg-gradient-to-b from-accent/10 to-background">
+    <section id="menu" className="py-12 md:py-20 bg-gradient-to-b from-accent/10 to-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-xs font-serif text-primary tracking-widest uppercase">Sabores</span>
@@ -70,14 +70,7 @@ export default function Menu({ categories }: MenuProps) {
           ))}
         </div>
 
-        <div className="mt-16 p-10 bg-gradient-to-r from-primary/10 to-accent/20 border-2 border-primary/30 rounded-lg text-center shadow-lg">
-          <p className="text-lg text-muted-foreground mb-8 font-medium">
-            ¿Tenés alguna pregunta sobre nuestros sabores? Consultá con nuestro personal sobre disponibilidad y opciones especiales.
-          </p>
-          <button className="px-10 py-4 bg-primary text-primary-foreground rounded-sm font-bold text-lg hover:bg-primary/90 hover:scale-105 transition-all duration-300 shadow-xl">
-            Visitanos
-          </button>
-        </div>
+  
       </div>
     </section>
   )

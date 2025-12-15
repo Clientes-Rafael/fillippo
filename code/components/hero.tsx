@@ -30,11 +30,11 @@ export default function Hero() {
         </h1>
 
         <p className="text-2xl md:text-3xl text-white mb-6 font-serif italic tracking-wide animate-fade-in">
-          Dulzura que inspira sonrisas
+            Una experiencia llena de sabor y naturaleza
         </p>
 
         <p className="text-lg text-white/90 mb-12 max-w-2xl mx-auto text-pretty leading-relaxed">
-          Descubrá nuestra amplia variedad de sabores tradicionales y creativos. Calidad e innovación en cada bocado.
+        Visitanos y descubrí la magia de nuestro espacio y nuestros helados
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
@@ -45,12 +45,14 @@ export default function Hero() {
             Ver Menú
           </button>
           <button
-            onClick={() => scrollToSection("gallery")}
-            className="px-10 py-4 border-2 border-white text-white rounded-sm font-bold text-lg hover:bg-white hover:text-primary transition-all duration-300 shadow-xl"
+            onClick={() => scrollToSection("phone-order")}
+            className="px-10 py-4 bg-white/1 backdrop-blur-sm border border-white/30 text-white rounded-sm font-semibold text-base hover:bg-white/20 hover:border-white/50 transition-all duration-300"
           >
-            Ver Galería
+            Hacé tu pedido
           </button>
         </div>
+        
+        
       </div>
     </section>
   )

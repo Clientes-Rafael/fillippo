@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Fillippo Heladería color scheme - Black, Green #74b354, White */
+  /* Fillippo Heladería color scheme - Black, Green #73B550, White */
   --background: oklch(1 0 0);
   --foreground: oklch(0 0 0);
   --card: oklch(0.99 0 0);
@@ -148,5 +148,65 @@
 
   .animate-fade-in {
     animation: fade-in 1s ease-out forwards;
+  }
+
+  /* Emoji animations for about section */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(5deg);
+    }
+  }
+
+  @keyframes swing {
+    0%, 100% {
+      transform: rotate(-8deg);
+    }
+    50% {
+      transform: rotate(8deg);
+    }
+  }
+
+  @keyframes pulse-scale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+
+  .animate-swing {
+    animation: swing 2.5s ease-in-out infinite;
+  }
+
+  .animate-pulse-scale {
+    animation: pulse-scale 2s ease-in-out infinite;
+  }
+
+  /* Phone ring animation */
+  @keyframes phone-ring {
+    0%, 100% {
+      transform: rotate(0deg) scale(1);
+    }
+    10%, 30% {
+      transform: rotate(-15deg) scale(1.1);
+    }
+    20%, 40% {
+      transform: rotate(15deg) scale(1.1);
+    }
+    50% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  .animate-phone-ring {
+    animation: phone-ring 2s ease-in-out infinite;
   }
 }

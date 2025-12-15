@@ -51,8 +51,11 @@ export default function Header() {
           ))}
         </div>
 
-        <button className="hidden md:inline-flex px-6 py-2 bg-primary text-primary-foreground rounded-sm text-sm font-medium hover:opacity-90 transition-opacity">
+        <button className="hidden md:inline-flex px-6 py-2 bg-primary text-primary-foreground rounded-sm text-sm font-medium hover:opacity-90 transition-opacity"
+         onClick={() => scrollToSection("#footer")}
+        >
           Visitanos
+          
         </button>
 
         {/* Mobile Menu Button */}
@@ -74,7 +77,9 @@ export default function Header() {
                 {item.name}
               </button>
             ))}
-            <button className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-sm text-sm font-medium hover:opacity-90 transition-opacity mt-4">
+            <button className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-sm text-sm font-medium hover:opacity-90 transition-opacity mt-4"
+            onClick={() => scrollToSection('#footer')}
+  >
               Visitanos
             </button>
           </div>

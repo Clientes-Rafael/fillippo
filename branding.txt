@@ -5,7 +5,7 @@ HEX: #000000
 HSL: 0, 0%, 0%
 RGB: 0, 0, 0
 CMKY: 0, 100, 0, 0
-#74b354
+#73B550
 #ffffff
 
 Fonts
