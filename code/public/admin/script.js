@@ -70,7 +70,9 @@ function showLogin() {
 function showDashboard() {
   loginPage.classList.add('hidden');
   dashboardPage.classList.remove('hidden');
-  userEmail.textContent = currentUser.email;
+  if (userEmail) {
+    userEmail.textContent = currentUser.email;
+  }
 }
 
 // ==================== CARGA DE DATOS ====================
@@ -180,29 +182,10 @@ function createCategoryCard(category, items) {
 }
 
 function createItemsTable(categoryId, items) {
-  const itemsHtml = items.map(item => {
-    const nombre = escapeHtml(item.nombre || '');
-    const description = escapeHtml(item.descripcion || '');
-    const isMobile = window.innerWidth <= 768;
-    const needsTruncate = description.length > 50 && isMobile;
-    
-    return `
-    <tr data-item-id="${item.id}">
-      <td class="item-name-cell">${nombre}</td>
-      <td class="item-description-cell">
-        <span 
-          class="editable-description" 
-          onclick="editDescription('${categoryId}', '${item.id}')"
-          data-description="${description}"
-          title="Clic para editar descripción"
-        >
-          <span class="item-description-text ${needsTruncate ? 'truncated' : ''}" data-full-text="${description}">
-            ${description}
-          </span>
-          ${needsTruncate ? `<span class="description-toggle" onclick="event.stopPropagation(); toggleDescription(this)">ver más</span>` : ''}
-        </span>
-      </td>
-      <td>
+  const itemsHtml = items.map(item => `
+    <tr data-item-id="${item.id}" class="item-main-row">
+      <td class="item-name-cell">${escapeHtml(item.nombre)}</td>
+      <td class="item-price-cell">
         <span 
           class="editable-price" 
           onclick="editPrice('${categoryId}', '${item.id}')"
@@ -213,25 +196,34 @@ function createItemsTable(categoryId, items) {
       </td>
       <td class="actions-cell">
         <button 
-          class="btn-icon btn-danger" 
-          onclick="deleteItem('${categoryId}', '${item.id}', '${nombre}')"
-          title="Eliminar"
+          class="btn-delete" 
+          onclick="deleteItem('${categoryId}', '${item.id}', '${escapeHtml(item.nombre)}')"
+          title="Eliminar producto"
         >
-          🗑️
+          Borrar
         </button>
       </td>
     </tr>
-  `;
-  }).join('');
+    <tr data-item-id="${item.id}-desc" class="item-description-row">
+      <td colspan="3" class="item-description-cell">
+        <span class="description-label">Descripción:</span>
+        <span 
+          class="editable-description" 
+          onclick="editDescription('${categoryId}', '${item.id}')"
+          data-description="${escapeHtml(item.descripcion || '')}"
+          title="Clic para editar descripción"
+        >${escapeHtml(item.descripcion || '')}</span>
+      </td>
+    </tr>
+  `).join('');
   
   return `
     <table class="items-table">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Precio</th>
-          <th style="text-align: right;">Acciones</th>
+          <th class="th-name">Nombre</th>
+          <th class="th-price">Precio</th>
+          <th class="th-actions" style="text-align: right;">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -363,6 +355,10 @@ window.editPrice = function(categoryId, itemId) {
 // Editar descripción inline
 window.editDescription = function(categoryId, itemId) {
   const descSpan = event.target;
+  
+  // Si ya está en modo edición, no hacer nada
+  if (descSpan.querySelector('.description-input')) return;
+  
   const currentDesc = descSpan.dataset.description;
   
   const input = document.createElement('input');
@@ -413,40 +409,92 @@ window.editDescription = function(categoryId, itemId) {
   input.select();
 };
 
-// Agregar nuevo ítem
-window.addNewItem = async function(categoryId) {
-  const nombre = prompt('Nombre del ítem:');
-  if (!nombre || nombre.trim() === '') return;
+// Variables globales para el modal
+let currentCategoryForAdd = null;
+
+// Agregar nuevo ítem - abrir modal
+window.addNewItem = function(categoryId) {
+  currentCategoryForAdd = categoryId;
+  const modal = document.getElementById('addItemModal');
+  const form = document.getElementById('addItemForm');
   
-  const descripcion = prompt('Descripción (opcional):') || '';
-  const precioStr = prompt('Precio:', '9999');
-  const precio = parseFloat(precioStr);
+  // Limpiar formulario
+  form.reset();
   
-  if (isNaN(precio) || precio < 0) {
-    alert('El precio debe ser un número válido');
-    return;
-  }
+  // Mostrar modal
+  modal.classList.remove('hidden');
   
-  try {
-    // Obtener el orden más alto actual
-    const items = categoriesData.get(categoryId) || [];
-    const maxOrder = items.length > 0 
-      ? Math.max(...items.map(i => i.orden || 0))
-      : 0;
-    
-    await db.collection(categoryId).add({
-      nombre: nombre.trim(),
-      descripcion: descripcion.trim(),
-      precio: precio,
-      orden: maxOrder + 1
-    });
-    
-    await loadMenuData();
-  } catch (error) {
-    console.error('Error agregando ítem:', error);
-    alert('Error al agregar el ítem');
-  }
+  // Focus en el primer campo
+  setTimeout(() => {
+    document.getElementById('itemName').focus();
+  }, 100);
 };
+
+// Cerrar modal
+window.closeAddItemModal = function() {
+  const modal = document.getElementById('addItemModal');
+  modal.classList.add('hidden');
+  currentCategoryForAdd = null;
+};
+
+// Manejar submit del formulario
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('addItemForm');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (!currentCategoryForAdd) return;
+      
+      const submitBtn = document.getElementById('addItemSubmitBtn');
+      const nombre = document.getElementById('itemName').value.trim();
+      const descripcion = document.getElementById('itemDescription').value.trim();
+      const precio = parseFloat(document.getElementById('itemPrice').value);
+      
+      // Validaciones
+      if (!nombre) {
+        alert('El nombre es obligatorio');
+        return;
+      }
+      
+      if (isNaN(precio) || precio < 0) {
+        alert('El precio debe ser un número válido');
+        return;
+      }
+      
+      // Deshabilitar botón durante el proceso
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Agregando...';
+      
+      try {
+        // Obtener el orden más alto actual
+        const items = categoriesData.get(currentCategoryForAdd) || [];
+        const maxOrder = items.length > 0 
+          ? Math.max(...items.map(i => i.orden || 0))
+          : 0;
+        
+        await db.collection(currentCategoryForAdd).add({
+          nombre: nombre,
+          descripcion: descripcion,
+          precio: precio,
+          orden: maxOrder + 1,
+          isAvailable: true,
+          categoryId: currentCategoryForAdd
+        });
+        
+        // Cerrar modal y recargar datos
+        closeAddItemModal();
+        await loadMenuData();
+      } catch (error) {
+        console.error('Error agregando ítem:', error);
+        alert('Error al agregar el ítem');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Agregar ítem';
+      }
+    });
+  }
+});
 
 // Eliminar ítem
 window.deleteItem = async function(categoryId, itemId, itemName) {
@@ -483,19 +531,14 @@ function escapeHtml(text) {
 }
 
 // Toggle description expansion (mobile)
-window.toggleDescription = function(toggleElement) {
-  const descriptionText = toggleElement.previousElementSibling;
-  const isExpanded = descriptionText.classList.contains('expanded');
+window.toggleDescriptionExpand = function(descSpan) {
+  // Solo en móvil
+  if (window.innerWidth > 768) return;
   
-  if (isExpanded) {
-    descriptionText.classList.remove('expanded');
-    descriptionText.classList.add('truncated');
-    toggleElement.textContent = 'ver más';
-  } else {
-    descriptionText.classList.remove('truncated');
-    descriptionText.classList.add('expanded');
-    toggleElement.textContent = 'ver menos';
-  }
+  // No expandir si está en modo edición
+  if (descSpan.querySelector('.description-input')) return;
+  
+  descSpan.classList.toggle('expanded');
 };
 
 function getErrorMessage(errorCode) {
