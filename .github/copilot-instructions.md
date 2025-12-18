@@ -21,7 +21,8 @@ This is a **restaurant website template with dynamic menu system** powered by Fi
 ### Project Structure
 - **Next.js app:** `fillipo/code/` (package.json location - run ALL commands here)
 - **Branding source:** `fillipo/branding.txt` (colors, fonts, content in Spanish)
-- **Assets:** `fillipo/imagenes/` (10 images: hero, logo, gallery 1-6, mockups)
+- **Assets:** `fillipo/imagenes/` (source images) → Copy to `fillipo/code/public/images/`
+- **Required images:** `hero.jpg`, `logo.png`, `nombre.png` (brand logo), gallery `1.jpg-6.jpg`, `mockup-1.png`, `mockup-2.png`
 - **Customization guide:** `fillipo/CUSTOMIZATION-PROMPT.md` (12-step process)
 
 ### Firebase Integration
@@ -33,14 +34,14 @@ This is a **restaurant website template with dynamic menu system** powered by Fi
 
 ### Key Commands
 ```bash
-# Frontend development
-cd fillipo/code && npm run dev
+# Frontend development (must be in code/ directory)
+cd code && npm run dev
 
-# Initialize/update Firestore data
-cd fillipo && npm run init-data
+# Initialize/update Firestore data (run from project root)
+npm run init-data
 
 # Build for production
-cd fillipo/code && npm ci --legacy-peer-deps && npm run build
+cd code && npm ci --legacy-peer-deps && npm run build
 
 # Access admin panel
 http://localhost:3000/admin (after running dev server)
@@ -48,13 +49,13 @@ http://localhost:3000/admin (after running dev server)
 
 ## Development Workflows
 
-### Fillippo Next.js Development
+### Fillipo Next.js Development
 ```powershell
 # CRITICAL: Always navigate to code/ folder first
-cd fillipo/code
+cd code
 
 # Development server
-pnpm dev  # or npm run dev
+npm run dev
 
 # Production build (static export)
 npm ci --legacy-peer-deps && npm run build
@@ -63,9 +64,7 @@ npm ci --legacy-peer-deps && npm run build
 
 ### Firebase Operations
 ```powershell
-cd fillipo
-
-# Install Firebase dependencies
+# Install Firebase dependencies (from project root)
 npm install
 
 # Initialize Firestore with menu data (requires serviceAccountKey-fillipo.json)
@@ -86,24 +85,27 @@ firebase deploy --only firestore:indexes
 This template follows a **systematic 12-step customization methodology** (see `fillipo/CUSTOMIZATION-PROMPT.md`). It's NOT a typical app—it's a reusable template designed to be adapted for different restaurants.
 
 ### Customization Workflow (High-Level)
-1. **Setup:** Verify working directory (`fillipo/code/`), create `public/images/` folder, place 10 assets
+1. **Setup:** Verify working directory (`fillipo/code/`), create `public/images/` folder, place assets (hero, logo, gallery images)
 2. **Colors:** Convert branding HEX colors to OKLCH, update CSS variables in `app/globals.css`
 3. **Typography:** Import Google Fonts in `app/layout.tsx`, assign to headings/body in `globals.css`
-4. **Logo:** Replace placeholder in `components/header.tsx` + `footer.tsx` with actual logo
+4. **Logo:** Replace placeholder in `components/header.tsx` + `footer.tsx` with actual logo (`logo.png`)
 5. **Hero:** Set background image via `style={{ backgroundImage: 'url(/images/hero.jpg)' }}` (NEVER gradients)
+   - For hero branding, use logo image (`nombre.png`) instead of text when available
+   - Example: `<img src="/images/nombre.png" alt="Brand" className="mx-auto w-full max-w-md md:max-w-2xl" />`
 6. **Content:** Translate all text to match branding language (Spanish uses **voseo**: "Disfrutá", "Visitanos")
 7. **Gallery:** Update `components/gallery.tsx` with 6 product/ambiance images
 8. **Menu:** Adapt `components/menu.tsx` with actual products/categories from branding doc
 9. **Footer:** Update contact info, hours, location
-10. **Testing:** Run `pnpm dev`, verify all sections render correctly
-11. **Build:** Test production build with `npm run build`
+10. **Testing:** Run `npm run dev` in `code/` folder, verify all sections render correctly
+11. **Build:** Test production build with `npm ci --legacy-peer-deps && npm run build`
 12. **Deploy:** Push to Netlify with correct base directory config
 
 ### Non-Negotiable Rules
 - **Hero backgrounds:** MUST use actual hero image, NEVER decorative gradients/blur effects
+- **Hero branding:** Use logo image file (`nombre.png`) instead of text headings when brand provides a logo
 - **Language consistency:** If branding is Spanish → full Spanish site (including Argentine voseo for Buenos Aires clients)
 - **Color format:** CSS uses OKLCH (not HSL/RGB) - convert HEX via online tools
-- **Image paths:** Assets go in `fillipo/code/public/images/`, referenced as `/images/hero.jpg` in components
+- **Image paths:** Assets go in `fillipo/code/public/images/`, referenced as `/images/filename.ext` in components
 - **Working directory:** ALL commands run in `fillipo/code/`, NOT workspace root
 
 ## Code Conventions & Architecture
@@ -160,14 +162,15 @@ async function getMenuData() {
 
 ## Common Pitfalls & Anti-Patterns
 
-### Fillippo Template Issues
+### Fillipo Template Issues
 1. **Wrong working directory:** Commands MUST run in `fillipo/code/`, not workspace root or `fillipo/`
    - ❌ `cd fillipo && npm run dev` (fails - no package.json here)
-   - ✅ `cd fillipo/code && npm run dev`
+   - ✅ `cd code && npm run dev`
 
 2. **Hero section mistakes:** 
    - ❌ Using gradient backgrounds, blur effects, or decorative overlays
    - ✅ Always use actual hero image: `style={{ backgroundImage: 'url(/images/hero.jpg)' }}`
+   - ✅ Use brand logo image (`nombre.png`) instead of text when available
 
 3. **Language inconsistency:**
    - ❌ Mixing English/Spanish, or using formal Spanish ("Disfruta") for Argentine clients
@@ -176,6 +179,7 @@ async function getMenuData() {
 4. **Image path confusion:**
    - File location: `fillipo/code/public/images/hero.jpg`
    - Component reference: `/images/hero.jpg` (Next.js serves `/public/` at root)
+   - Brand assets: `nombre.png` (logo for hero), `logo.png` (header/footer logo)
 
 5. **Deployment config errors:**
    - ❌ Setting Netlify base directory to workspace root
@@ -258,10 +262,11 @@ How the dynamic menu system works:
 ## When Making Changes
 
 - **Read first:** Check `CUSTOMIZATION-PROMPT.md` relevant step before editing
-- **Test locally:** Run `pnpm dev` in `code/` folder to verify changes
+- **Test locally:** Run `npm run dev` in `code/` folder to verify changes
 - **Build test:** Run `npm ci --legacy-peer-deps && npm run build` to ensure static export works
 - **Language check:** Verify all Spanish text uses voseo ("Disfrutá", "Visitanos", "Conocenos")
 - **Hero validation:** Inspect hero section to confirm background image is visible (not hidden by gradients)
+  - Verify brand logo (`nombre.png`) displays correctly if used instead of text
 
 ## Useful References
 

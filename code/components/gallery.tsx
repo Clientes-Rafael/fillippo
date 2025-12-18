@@ -28,8 +28,8 @@
     },
     {
       id: 6,
-      src: "/images/6.jpg",
-      title: "Experiencia Fillippo",
+      src: "/images/7.jpg",
+      title: "Conocé la magia de nuestro espacio",
     },
   ]
 
@@ -38,8 +38,14 @@ export default function Gallery() {
     <section id="gallery" className="py-4  bg-gradient-to-b from-background to-accent/10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-xs font-serif text-primary tracking-widest uppercase">Galería</span>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold mt-4 text-foreground">Nuestras Sabores</h2>
+          <div className="mb-4">
+            <span className="text-xs font-serif text-primary tracking-widest uppercase bg-primary/10 px-4 py-2 rounded-full">
+              Galería
+            </span>
+          </div>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+            Experiencia <span className="text-primary">Fillippo</span>
+          </h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

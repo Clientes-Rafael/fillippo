@@ -29,13 +29,12 @@ export default function Header() {
       <nav className="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
           <Image
-            src="/images/logo.png"
+            src="/images/logo1.svg"
             alt="Fillippo Heladería Logo"
             width={50}
             height={50}
             className="h-12 w-auto"
           />
-          <span className="font-serif text-xl font-bold text-primary">Fillippo</span>
         </div>
 
         {/* Desktop Navigation */}
