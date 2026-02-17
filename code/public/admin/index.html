@@ -69,11 +69,37 @@
         <h2 class="section-title">Gestión de Menú</h2>
       </div>
 
-      <div id="loadingState" class="loading">
-        <div class="spinner"></div>
+      <!-- Tab bar -->
+      <div style="display:flex;gap:12px;margin-bottom:24px;">
+        <button
+          id="tabCafeteria"
+          onclick="switchTab('cafeteria')"
+          style="flex:1;padding:12px 20px;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;background:#73B550;color:#fff;transition:all .2s;">
+          ☕ Cafetería
+        </button>
+        <button
+          id="tabHeladeria"
+          onclick="switchTab('heladeria')"
+          style="flex:1;padding:12px 20px;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;background:#e5e7eb;color:#374151;transition:all .2s;">
+          🍦 Heladería
+        </button>
       </div>
 
-      <div id="categoriesContainer" class="categories-grid hidden"></div>
+      <!-- Sección Cafetería -->
+      <div id="cafeteriaSection">
+        <div id="loadingState" class="loading">
+          <div class="spinner"></div>
+        </div>
+        <div id="categoriesContainer" class="categories-grid hidden"></div>
+      </div>
+
+      <!-- Sección Heladería -->
+      <div id="heladeriaSection" style="display:none;">
+        <div id="heladeriaLoadingState" class="loading">
+          <div class="spinner"></div>
+        </div>
+        <div id="heladeriaContainer" class="categories-grid hidden"></div>
+      </div>
     </main>
   </div>
 
@@ -136,5 +162,6 @@
   <!-- Configuración y Scripts -->
   <script src="firebase-config.js"></script>
   <script src="script.js"></script>
+  <script src="heladeria-script.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     "init-data": "node firestore-init-data-fillipo.js"
   },
   "dependencies": {
-    "firebase-admin": "^12.0.0"
+    "firebase-admin": "^12.0.0",
+    "google-gax": "^5.0.6"
   }
 }

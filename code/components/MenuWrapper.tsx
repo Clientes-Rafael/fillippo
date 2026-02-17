@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase-config';
 import Menu from './menu';
@@ -74,8 +77,17 @@ async function getMenuData(): Promise<Category[]> {
   }
 }
 
-export default async function MenuWrapper() {
-  const menuData = await getMenuData();
-  
+export default function MenuWrapper() {
+  const [menuData, setMenuData] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const loadMenuData = async () => {
+      const data = await getMenuData();
+      setMenuData(data);
+    };
+
+    loadMenuData();
+  }, []);
+
   return <Menu categories={menuData} />;
 }
