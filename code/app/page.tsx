@@ -3,6 +3,7 @@ import Hero from "@/components/hero"
 import About from "@/components/about"
 import Gallery from "@/components/gallery"
 import MenuWrapper from "@/components/MenuWrapper"
+import IceCreamWrapper from "@/components/IceCreamWrapper"
 import PhoneOrder from "@/components/phone-order"
 import GoogleReviews from "@/components/google-reviews"
 import Footer from "@/components/footer"
@@ -14,6 +15,7 @@ export default function Home() {
       <Header />
       <Hero />
       <MenuWrapper />
+      <IceCreamWrapper />
       <Gallery />
       <About />
       <PhoneOrder />
